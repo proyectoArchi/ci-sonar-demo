@@ -2,9 +2,16 @@ pipeline {
   agent any
   tools { maven 'Default Maven' }
   stages {
-    stage('SCM')     { steps { checkout scm } }
-    stage('Build')   { steps { sh 'mvn clean compile' } }
-    stage('Test')    { steps { sh 'mvn test' } }
+    stage('Build') {
+      steps {
+        sh 'mvn clean compile'
+      }
+    }
+    stage('Test') {
+      steps {
+        sh 'mvn test'
+      }
+    }
     stage('SonarQube Analysis') {
       steps {
         withSonarQubeEnv('SonarLocal') {
